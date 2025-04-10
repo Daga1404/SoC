@@ -1,0 +1,13 @@
+///Machine code explanation
+//Multiplier by repeated addition
+0x01800513 //immediate addition of reg(zero) + 24 to reg(a0)
+0x00300593 //immediate addition of reg(zero) + 3 to reg(a1)
+0x00000393 //immediate addition of reg(zero) + 0 to reg(t2)
+0x00058E33 //addition of reg(a5) and reg(zero) to reg(t3)
+0x01054863 //branch to the assingment of the value in reg(t2) to reg(a0) if the value of reg(a0) is equal to the value of reg(a6)
+///If reg(a0) and reg(a6) are not equal continue with the instructions normally
+0x00138393 //immediate addition of reg(t2) + 1 to reg(t2) which corresponds to the increment of teh iteration counter
+0х00ВЕ0Е33 //addition of reg(t3) and reg(a1) to reg(t3) which corresponds to the addition that will be repeated in oreder to get a multiplication
+0xFF5FF06F //jump back 16 bytes, in this case, a jump back to the branching (beq) instruction
+0x00038533 //This is the line that the branching (beq) instruction will jump to when reg(t2) reaches the target value reg(a0)=24
+///This last line assigns the current value of reg(t2) to reg(a0) by adding reg(t2) + reg(zero)
