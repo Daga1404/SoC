@@ -1,0 +1,84 @@
+|decoder
+clk => clk.IN2
+zero => ~NO_FANOUT~
+op[0] => op[0].IN1
+op[1] => op[1].IN1
+op[2] => op[2].IN1
+op[3] => op[3].IN1
+op[4] => op[4].IN1
+op[5] => op[5].IN2
+op[6] => op[6].IN1
+funct3[0] => funct3[0].IN1
+funct3[1] => funct3[1].IN1
+funct3[2] => funct3[2].IN1
+funct7_5 => funct7_5.IN1
+branch <= main_decoder:m_dec_u1.branch
+jump <= main_decoder:m_dec_u1.jump
+mem_write <= main_decoder:m_dec_u1.mem_write
+alu_src <= main_decoder:m_dec_u1.alu_src
+reg_write <= main_decoder:m_dec_u1.reg_write
+result_src[0] <= main_decoder:m_dec_u1.result_src
+result_src[1] <= main_decoder:m_dec_u1.result_src
+imm_src[0] <= main_decoder:m_dec_u1.imm_src
+imm_src[1] <= main_decoder:m_dec_u1.imm_src
+alu_control[0] <= alu_decoder:a_dec_u1.alu_control
+alu_control[1] <= alu_decoder:a_dec_u1.alu_control
+alu_control[2] <= alu_decoder:a_dec_u1.alu_control
+
+
+|decoder|main_decoder:m_dec_u1
+clk => jump~reg0.CLK
+clk => alu_op[0]~reg0.CLK
+clk => alu_op[1]~reg0.CLK
+clk => branch~reg0.CLK
+clk => result_src[0]~reg0.CLK
+clk => result_src[1]~reg0.CLK
+clk => mem_write~reg0.CLK
+clk => alu_src~reg0.CLK
+clk => imm_src[0]~reg0.CLK
+clk => imm_src[1]~reg0.CLK
+clk => reg_write~reg0.CLK
+op[0] => Decoder0.IN6
+op[1] => Decoder0.IN5
+op[2] => Decoder0.IN4
+op[3] => Decoder0.IN3
+op[4] => Decoder0.IN2
+op[5] => Decoder0.IN1
+op[6] => Decoder0.IN0
+branch <= branch~reg0.DB_MAX_OUTPUT_PORT_TYPE
+jump <= jump~reg0.DB_MAX_OUTPUT_PORT_TYPE
+mem_write <= mem_write~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alu_src <= alu_src~reg0.DB_MAX_OUTPUT_PORT_TYPE
+reg_write <= reg_write~reg0.DB_MAX_OUTPUT_PORT_TYPE
+result_src[0] <= result_src[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+result_src[1] <= result_src[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+imm_src[0] <= imm_src[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+imm_src[1] <= imm_src[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alu_op[0] <= alu_op[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alu_op[1] <= alu_op[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|decoder|alu_decoder:a_dec_u1
+clk => alu_control[0]~reg0.CLK
+clk => alu_control[1]~reg0.CLK
+clk => alu_control[2]~reg0.CLK
+alu_op[0] => Decoder0.IN1
+alu_op[0] => Mux3.IN5
+alu_op[1] => Decoder0.IN0
+alu_op[1] => Mux3.IN4
+funct3[0] => Mux0.IN7
+funct3[0] => Mux1.IN7
+funct3[0] => Mux2.IN7
+funct3[1] => Mux0.IN6
+funct3[1] => Mux1.IN6
+funct3[1] => Mux2.IN6
+funct3[2] => Mux0.IN5
+funct3[2] => Mux1.IN5
+funct3[2] => Mux2.IN5
+funct7_5 => Equal0.IN62
+op_5 => Equal0.IN63
+alu_control[0] <= alu_control[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alu_control[1] <= alu_control[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alu_control[2] <= alu_control[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
