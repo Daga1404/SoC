@@ -1,5 +1,5 @@
 *.bak
-db/
+SoC/Verilog/db/
 incremental_db/
 output_files/
 .qsys_edit/
